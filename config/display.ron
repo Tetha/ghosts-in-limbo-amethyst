@@ -1,0 +1,4 @@
+(
+  title: "Ghosts in Limbo",
+  dimensions: Some((1024, 768)),
+)

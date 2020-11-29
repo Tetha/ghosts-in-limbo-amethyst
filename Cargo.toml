@@ -1,0 +1,15 @@
+[package]
+name = "ghosts-in-limbo-amethyst"
+version = "0.1.0"
+authors = ["hkraemer"]
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+#syn = "=1.0.51" # Downgrade because the 1.0.52 doesn't compile with my rust 1.47
+#crossbeam-utils = "=0.8.0"
+
+[dependencies.amethyst]
+version = "0.15.1"
+features = ["vulkan"]

@@ -1,0 +1,73 @@
+#![enable(implicit_some)]
+Container(
+    transform: (
+        id: "background",
+        anchor: Middle,
+        stretch: XY( x_margin: 0., y_margin: 0., keep_aspect_ratio: false),
+        width: 20.,
+        height: 20.,
+    ),
+    background: SolidColor(0.03, 0.03, 0.03, 1.0),
+    children: [
+        Button(
+            transform: (
+                id: "level_1",
+                width: 550.,
+                height: 50.,
+                tab_order: 3,
+                //anchor: TopMiddle,
+                y: 0,
+                mouse_reactive: true,
+            ),
+            button: (
+                text: "LEVEL 1",
+                font: File("font/square.ttf", ("TTF", ())),
+                font_size: 40.,
+                normal_text_color: (1.0, 0.65, 0., 1.0), // ffa500
+                normal_image: SolidColor(0., 0., 0., 1.),
+                hover_image: SolidColor(0.1, 0.1, 0.1, 1.),
+                press_image: SolidColor(0.15, 0.15, 0.15, 1.),
+            )
+        ),
+        Button(
+            transform: (
+                id: "level_2",
+                width: 550.,
+                height: 50.,
+                tab_order: 3,
+                //anchor: Middle,
+                y: 100,
+                mouse_reactive: true,
+            ),
+            button: (
+                text: "LEVEL 2",
+                font: File("font/square.ttf", ("TTF", ())),
+                font_size: 40.,
+                normal_text_color: (1.0, 0.65, 0., 1.0), // ffa500
+                normal_image: SolidColor(0., 0., 0., 1.),
+                hover_image: SolidColor(0.1, 0.1, 0.1, 1.),
+                press_image: SolidColor(0.15, 0.15, 0.15, 1.),
+            )
+        ),
+        Button(
+            transform: (
+                id: "level_3",
+                width: 550.,
+                height: 50.,
+                tab_order: 3,
+                //anchor: BottomMiddle,
+                y: 200,
+                mouse_reactive: true,
+            ),
+            button: (
+                text: "LEVEL 3",
+                font: File("font/square.ttf", ("TTF", ())),
+                font_size: 40.,
+                normal_text_color: (1.0, 0.65, 0., 1.0), // ffa500
+                normal_image: SolidColor(0., 0., 0., 1.),
+                hover_image: SolidColor(0.1, 0.1, 0.1, 1.),
+                press_image: SolidColor(0.15, 0.15, 0.15, 1.),
+            )
+        )
+    ]
+)
