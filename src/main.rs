@@ -8,6 +8,7 @@ use amethyst::{Application, GameDataBuilder, Result};
 use amethyst::utils::application_root_dir;
 
 mod main_menu;
+mod tile_test;
 
 fn main() -> Result<()> {
     amethyst::start_logger(Default::default());
