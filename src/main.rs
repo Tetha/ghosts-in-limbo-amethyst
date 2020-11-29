@@ -1,14 +1,17 @@
 use amethyst::assets::HotReloadBundle;
 use amethyst::core::TransformBundle;
 use amethyst::input::{InputBundle, StringBindings};
-use amethyst::renderer::{RenderToWindow, RenderingBundle};
+use amethyst::renderer::{RenderFlat2D, RenderToWindow, RenderingBundle};
 use amethyst::renderer::types::DefaultBackend;
 use amethyst::ui::{RenderUi, UiBundle};
 use amethyst::{Application, GameDataBuilder, Result};
 use amethyst::utils::application_root_dir;
+use loading::LoadingState;
 
 mod main_menu;
 mod tile_test;
+mod game;
+mod loading;
 
 fn main() -> Result<()> {
     amethyst::start_logger(Default::default());
@@ -28,15 +31,14 @@ fn main() -> Result<()> {
                     RenderToWindow::from_config_path(display_config_path)?
                         .with_clear([0.005, 0.005, 0.005, 1.0]),
                 )
-                .with_plugin(RenderUi::default()),
-            // If you want to draw Sprites and such, you would need this additionally:
-            // .with_plugin(RenderFlat2D::default())
+                .with_plugin(RenderUi::default())
+                .with_plugin(RenderFlat2D::default())
         )?
         ;
 
     let mut game = Application::new(
         assets_dir,
-        main_menu::MainMenuState::default(),
+        LoadingState::default(),
         game_data,
     )?;
     game.run();
