@@ -5,7 +5,7 @@ use amethyst::prelude::*;
 use amethyst::renderer::{Camera, SpriteSheet};
 use amethyst::{GameData, SimpleState, SimpleTrans, StateData, StateEvent, Trans, input};
 
-use crate::game;
+use crate::game::{self, MemoryType};
 use crate::main_menu::MainMenuState;
 
 pub struct TileTestState {
@@ -32,7 +32,7 @@ impl SimpleState for TileTestState {
                   .build();
 
         let mut arrow_transform = Transform::default();
-        arrow_transform.set_translation_xyz(500., 500., 0.);
+        arrow_transform.set_translation_xyz(500., 200., 0.);
         game::create_arrow_entity(
             data.world,
             self.sprite_sheet.clone(),
@@ -96,7 +96,7 @@ impl SimpleState for TileTestState {
             arrow_transform.clone(), 
             self.container_entity);
 
-        arrow_transform.set_translation_xyz(500., 600., 0.);
+        arrow_transform.set_translation_xyz(500., 300., 0.);
 
         game::create_arrow_entity(
             data.world,
@@ -129,7 +129,7 @@ impl SimpleState for TileTestState {
             arrow_transform.clone(), 
             self.container_entity);
 
-        arrow_transform.set_translation_xyz(500., 700., 0.);
+        arrow_transform.set_translation_xyz(500., 400., 0.);
 
         game::create_arrow_entity(
             data.world,
@@ -162,6 +162,102 @@ impl SimpleState for TileTestState {
             arrow_transform.clone(), 
             self.container_entity);
         arrow_transform.append_translation_xyz(50., 0., 0.);
+
+        arrow_transform.set_translation_xyz(500., 500., 0.);
+
+        game::create_junction_entity(
+            data.world,
+            self.sprite_sheet.clone(), 
+            game::TJunctionExit::Up, 
+            game::TJunctionDirection::RightTurn, 
+            game::TJunctionMemoryPlacement::Turn,
+            MemoryType::Sun,
+            arrow_transform.clone(), 
+            self.container_entity);
+
+        arrow_transform.append_translation_xyz(50., 0., 0.);
+
+        game::create_junction_entity(
+            data.world,
+            self.sprite_sheet.clone(), 
+            game::TJunctionExit::Down, 
+            game::TJunctionDirection::RightTurn, 
+            game::TJunctionMemoryPlacement::Turn,
+            MemoryType::Sun,
+            arrow_transform.clone(), 
+            self.container_entity);
+
+        arrow_transform.append_translation_xyz(50., 0., 0.);
+
+        game::create_junction_entity(
+            data.world,
+            self.sprite_sheet.clone(), 
+            game::TJunctionExit::Left, 
+            game::TJunctionDirection::RightTurn, 
+            game::TJunctionMemoryPlacement::Turn,
+            MemoryType::Sun,
+            arrow_transform.clone(), 
+            self.container_entity);
+
+        arrow_transform.append_translation_xyz(50., 0., 0.);
+
+        game::create_junction_entity(
+            data.world,
+            self.sprite_sheet.clone(), 
+            game::TJunctionExit::Right, 
+            game::TJunctionDirection::RightTurn, 
+            game::TJunctionMemoryPlacement::Turn,
+            MemoryType::Sun,
+            arrow_transform.clone(), 
+            self.container_entity);
+
+        arrow_transform.set_translation_xyz(500., 600., 0.);
+        game::create_junction_entity(
+            data.world,
+            self.sprite_sheet.clone(), 
+            game::TJunctionExit::Up, 
+            game::TJunctionDirection::LeftTurn, 
+            game::TJunctionMemoryPlacement::Turn,
+            MemoryType::Sun,
+            arrow_transform.clone(), 
+            self.container_entity);
+
+        arrow_transform.append_translation_xyz(50., 0., 0.);
+
+        game::create_junction_entity(
+            data.world,
+            self.sprite_sheet.clone(), 
+            game::TJunctionExit::Down, 
+            game::TJunctionDirection::LeftTurn, 
+            game::TJunctionMemoryPlacement::Turn,
+            MemoryType::Sun,
+            arrow_transform.clone(), 
+            self.container_entity);
+
+        arrow_transform.append_translation_xyz(50., 0., 0.);
+
+        game::create_junction_entity(
+            data.world,
+            self.sprite_sheet.clone(), 
+            game::TJunctionExit::Left, 
+            game::TJunctionDirection::LeftTurn, 
+            game::TJunctionMemoryPlacement::Turn,
+            MemoryType::Sun,
+            arrow_transform.clone(), 
+            self.container_entity);
+
+        arrow_transform.append_translation_xyz(50., 0., 0.);
+
+        game::create_junction_entity(
+            data.world,
+            self.sprite_sheet.clone(), 
+            game::TJunctionExit::Right, 
+            game::TJunctionDirection::LeftTurn, 
+            game::TJunctionMemoryPlacement::Turn,
+            MemoryType::Sun,
+            arrow_transform.clone(), 
+            self.container_entity);
+
     }
 
     fn handle_event(&mut self, _data: StateData<'_, GameData<'_, '_>>, event: StateEvent) -> SimpleTrans {
