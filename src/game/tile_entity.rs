@@ -1,10 +1,15 @@
-use amethyst::assets::Handle;
+use amethyst::assets::{PrefabData, ProgressCounter, Handle};
 use amethyst::core::{Parent, Transform};
 use amethyst::prelude::*;
 use amethyst::ecs::Entity;
 use amethyst::renderer::{SpriteRender, SpriteSheet};
 use amethyst::shred::World;
 
+use serde::{Deserialize, Serialize};
+use amethyst::derive::PrefabData;
+use amethyst::Error;
+
+#[derive(Serialize, Deserialize, PrefabData, Debug)]
 pub enum ArrowDirection {
 	ArrowDirectionStraightUp,
 	ArrowDirectionStraightDown,

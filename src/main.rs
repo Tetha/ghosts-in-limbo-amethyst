@@ -1,20 +1,24 @@
-use amethyst::assets::HotReloadBundle;
+use amethyst::assets::{AssetStorage, HotReloadBundle, Processor};
 use amethyst::core::TransformBundle;
 use amethyst::input::{InputBundle, StringBindings};
 use amethyst::renderer::{RenderFlat2D, RenderToWindow, RenderingBundle};
 use amethyst::renderer::types::DefaultBackend;
 use amethyst::ui::{RenderUi, UiBundle};
-use amethyst::{Application, GameDataBuilder, Result};
+use amethyst::{Application, GameDataBuilder, LoggerConfig, Result};
 use amethyst::utils::application_root_dir;
+use level::WorldDefinition;
 use loading::LoadingState;
 
 mod main_menu;
 mod tile_test;
 mod game;
 mod loading;
+mod level;
 
 fn main() -> Result<()> {
-    amethyst::start_logger(Default::default());
+    let mut log_config = LoggerConfig::default();
+    log_config.level_filter = amethyst::LogLevelFilter::Debug;
+    amethyst::start_logger(log_config);
 
     let app_root = application_root_dir()?;
     let assets_dir = app_root.join("assets");
@@ -34,6 +38,7 @@ fn main() -> Result<()> {
                 .with_plugin(RenderUi::default())
                 .with_plugin(RenderFlat2D::default())
         )?
+        .with(Processor::<WorldDefinition>::new(), "", &[])
         ;
 
     let mut game = Application::new(

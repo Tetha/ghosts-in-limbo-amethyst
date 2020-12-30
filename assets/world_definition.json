@@ -1,0 +1,19 @@
+{
+    "levels": [
+        {
+            "name" : "Tutorial"
+        },
+        {
+            "name" : "Memories"
+        },
+        {
+            "name" : "Astray"
+        },
+        {
+            "name" : "Habits"
+        },
+        {
+            "name" : "New Experiences"
+        }
+    ]
+}
