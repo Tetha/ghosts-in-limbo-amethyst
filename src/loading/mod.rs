@@ -3,6 +3,8 @@ use amethyst::renderer::{ImageFormat, SpriteSheet, SpriteSheetFormat, Texture};
 use amethyst::{GameData, SimpleState, StateData};
 use amethyst::assets::{AssetStorage, Handle, JsonFormat, Loader, ProgressCounter, RonFormat};
 
+use crate::component::LevelAssociation;
+use crate::game::{MainMenuData};
 use crate::level::{WorldDefinition, WorldDefinitionHandle};
 use crate::main_menu::MainMenuState;
 
@@ -18,8 +20,6 @@ impl SimpleState for LoadingState {
     fn on_start(&mut self, data: StateData<'_, GameData<'_, '_>>) {
         let world = data.world;
         print!("Starting to load");
-        //world.insert(AssetStorage::<WorldDefinition>::new());
-
         {
         let loader = world.read_resource::<Loader>();
         let texture = loader.load(
@@ -37,18 +37,17 @@ impl SimpleState for LoadingState {
         ));
         }
 
-        let world_definition: Option<WorldDefinitionHandle>;
-        {
-
+        let world_definition_handle = {
             let loader = world.read_resource::<Loader>();
-            world_definition = Some(loader.load(
+            loader.load(
                 "world_definition.json",
                 JsonFormat,
                 &mut self.progress_counter,
                 &world.read_resource::<AssetStorage<WorldDefinition>>()
-            ));
-        }
-        world.insert(world_definition.unwrap());
+            )
+        };
+        world.register::<LevelAssociation>(); // TODO: remove
+        world.insert(world_definition_handle);
     }
 
     fn update(&mut self, _data: &mut StateData<'_, GameData<'_, '_>>) -> SimpleTrans {

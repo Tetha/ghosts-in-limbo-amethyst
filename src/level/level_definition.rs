@@ -1,14 +1,14 @@
 use amethyst::assets::{Asset, Handle};
 use amethyst::ecs::VecStorage;
 use serde::{Deserialize, Serialize};
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct WorldDefinition {
-    levels: Vec<LevelDefinition>
+    pub levels: Vec<LevelDefinition>
 }
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct LevelDefinition {
-    name: String
+    pub name: String
 }
 
 pub type WorldDefinitionHandle = Handle<WorldDefinition>;

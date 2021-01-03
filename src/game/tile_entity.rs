@@ -9,7 +9,7 @@ use serde::{Deserialize, Serialize};
 use amethyst::derive::PrefabData;
 use amethyst::Error;
 
-#[derive(Serialize, Deserialize, PrefabData, Debug)]
+#[derive(Serialize, Deserialize, Debug, Clone, Copy, PrefabData)]
 pub enum ArrowDirection {
 	ArrowDirectionStraightUp,
 	ArrowDirectionStraightDown,

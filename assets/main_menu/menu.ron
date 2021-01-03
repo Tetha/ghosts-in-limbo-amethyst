@@ -9,6 +9,7 @@ Container(
     ),
     background: SolidColor(0.03, 0.03, 0.03, 1.0),
     children: [
+        /*
         Button(
             transform: (
                 id: "level_1",
@@ -68,6 +69,6 @@ Container(
                 hover_image: SolidColor(0.1, 0.1, 0.1, 1.),
                 press_image: SolidColor(0.15, 0.15, 0.15, 1.),
             )
-        )
+        )*/
     ]
 )

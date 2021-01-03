@@ -9,6 +9,8 @@ use amethyst::utils::application_root_dir;
 use level::WorldDefinition;
 use loading::LoadingState;
 
+mod component;
+
 mod main_menu;
 mod tile_test;
 mod game;

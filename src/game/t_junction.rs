@@ -1,17 +1,20 @@
 use std::f32::consts::PI;
 
-use amethyst::assets::Handle;
+use amethyst::Error;
+use amethyst::assets::{Handle, PrefabData, ProgressCounter};
 use amethyst::core::math::Vector3;
 use amethyst::core::{Parent, Transform};
+use amethyst::derive::PrefabData;
 use amethyst::ecs::{Entity};
 use amethyst::prelude::*;
 use amethyst::renderer::palette::Srgba;
 use amethyst::renderer::resources::Tint;
 use amethyst::renderer::{SpriteRender, SpriteSheet};
-
 use super::MemoryType;
 
-#[derive(Debug, PartialEq, Eq, Copy, Clone)]
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, PartialEq, Eq, Copy, Clone, PrefabData, Deserialize, Serialize)]
 pub enum TJunctionExit {
     Up,
 	Down,
@@ -19,13 +22,13 @@ pub enum TJunctionExit {
 	Right,
 }
 
-#[derive(Debug, PartialEq, Eq, Copy, Clone)]
+#[derive(Debug, PartialEq, Eq, Copy, Clone, PrefabData, Deserialize, Serialize)]
 pub enum TJunctionDirection {
     LeftTurn,
     RightTurn,
 }
 
-#[derive(Debug, PartialEq, Eq, Copy, Clone)]
+#[derive(Debug, PartialEq, Eq, Copy, Clone, PrefabData, Deserialize, Serialize)]
 pub enum TJunctionMemoryPlacement {
     Straight,
     Turn,
