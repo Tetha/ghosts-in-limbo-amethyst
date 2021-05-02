@@ -1,4 +1,4 @@
-use amethyst::assets::{AssetStorage, HotReloadBundle, Processor};
+use amethyst::assets::{AssetStorage, HotReloadBundle, PrefabLoaderSystem, PrefabLoaderSystemDesc, Processor};
 use amethyst::core::TransformBundle;
 use amethyst::input::{InputBundle, StringBindings};
 use amethyst::renderer::{RenderFlat2D, RenderToWindow, RenderingBundle};
@@ -6,8 +6,10 @@ use amethyst::renderer::types::DefaultBackend;
 use amethyst::ui::{RenderUi, UiBundle};
 use amethyst::{Application, GameDataBuilder, LoggerConfig, Result};
 use amethyst::utils::application_root_dir;
+use component::{ArrowTilePrefab, InitialGhostPositionPrefab};
 use level::WorldDefinition;
 use loading::LoadingState;
+use systems::GridCoordinateTransformer;
 
 mod component;
 
@@ -16,6 +18,7 @@ mod tile_test;
 mod game;
 mod loading;
 mod level;
+mod systems;
 
 fn main() -> Result<()> {
     let mut log_config = LoggerConfig::default();
@@ -41,6 +44,15 @@ fn main() -> Result<()> {
                 .with_plugin(RenderFlat2D::default())
         )?
         .with(Processor::<WorldDefinition>::new(), "", &[])
+        .with_system_desc(
+            PrefabLoaderSystemDesc::<ArrowTilePrefab>::default(),
+            "",
+            &[])
+        .with_system_desc(
+            PrefabLoaderSystemDesc::<InitialGhostPositionPrefab>::default(),
+            "",
+            &[])
+        .with(GridCoordinateTransformer, "", &[])
         ;
 
     let mut game = Application::new(

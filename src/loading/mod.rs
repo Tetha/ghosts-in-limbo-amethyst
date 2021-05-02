@@ -48,6 +48,7 @@ impl SimpleState for LoadingState {
         };
         world.register::<LevelAssociation>(); // TODO: remove
         world.insert(world_definition_handle);
+        world.insert(self.spritesheet_handle.clone().expect("expected spritesheet to exist"));
     }
 
     fn update(&mut self, _data: &mut StateData<'_, GameData<'_, '_>>) -> SimpleTrans {

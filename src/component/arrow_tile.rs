@@ -1,4 +1,4 @@
-use amethyst::ecs::{Component, DenseVecStorage, Entity, WriteStorage};
+use amethyst::ecs::{Component, DenseVecStorage, Entity};
 use crate::game::ArrowDirection;
 use serde::{Deserialize, Serialize};
 use amethyst::Error;

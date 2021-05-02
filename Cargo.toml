@@ -13,7 +13,7 @@ serde = { version = "1.0", features = ["derive"] }
 
 
 [dependencies.amethyst]
-version = "0.15.1"
+version = "=0.15.1"
 features = ["vulkan", "json"]
 #[dependencies.amethyst]
 #git = "https://github.com/amethyst/amethyst"

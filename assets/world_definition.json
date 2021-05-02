@@ -1,18 +1,23 @@
 {
     "levels": [
         {
+            "id": "tutorial",
             "name" : "Tutorial"
         },
         {
+            "id": "memories",
             "name" : "Memories"
         },
         {
+            "id": "astray",
             "name" : "Astray"
         },
         {
+            "id": "habits",
             "name" : "Habits"
         },
         {
+            "id": "new_experiences",
             "name" : "New Experiences"
         }
     ]

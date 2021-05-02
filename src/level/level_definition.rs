@@ -3,12 +3,13 @@ use amethyst::ecs::VecStorage;
 use serde::{Deserialize, Serialize};
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct WorldDefinition {
-    pub levels: Vec<LevelDefinition>
+    pub levels: Vec<LevelMetadata>
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
-pub struct LevelDefinition {
-    pub name: String
+pub struct LevelMetadata {
+    pub name: String,
+    pub id: String
 }
 
 pub type WorldDefinitionHandle = Handle<WorldDefinition>;
