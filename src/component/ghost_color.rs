@@ -7,6 +7,8 @@ use serde::{Serialize, Deserialize};
 #[derive(Debug, Copy, Clone, Serialize, Deserialize, PrefabData)]
 pub enum GhostColor {
     Blue,
+    Red,
+    Green,
 }
 
 #[derive(Debug)]

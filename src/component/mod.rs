@@ -21,3 +21,5 @@ mod initial_ghost_position;
 mod initial_ghost_position_prefab;
 pub use initial_ghost_position_prefab::InitialGhostPositionPrefab;
 mod ghost_color;
+
+mod initial_ghost_direction;
