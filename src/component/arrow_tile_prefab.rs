@@ -1,5 +1,4 @@
-use amethyst::{assets::{AssetStorage, Handle, PrefabData, ProgressCounter}, core::Transform, ecs::WriteStorage, renderer::{SpriteRender, SpriteSheet, Texture, sprite}, shred::{Read, ReadExpect}};
-use amethyst::derive::PrefabData;
+use amethyst::{assets::{Handle, PrefabData}, core::Transform, ecs::WriteStorage, renderer::{SpriteRender, SpriteSheet}, shred::{ReadExpect}};
 use amethyst::ecs::Entity;
 use amethyst::Error;
 use serde::{Deserialize, Serialize};
@@ -32,8 +31,8 @@ impl<'a> PrefabData<'a> for ArrowTilePrefab {
         &self,
         entity: Entity,
         (grid_positions, simple_arrow_tiles, sprite_renderes, transforms, sprite_sheet): &mut Self::SystemData,
-        entities: &[Entity],
-        children: &[Entity],
+        _entities: &[Entity],
+        _children: &[Entity],
     ) -> Result<Self::Result, Error> {
         println!("Add to entity for arrow is being called");
         grid_positions.insert(entity, self.grid_position)?;
