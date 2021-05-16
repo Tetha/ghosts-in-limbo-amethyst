@@ -1,4 +1,4 @@
-use amethyst::{core::Transform, core::SystemDesc, ecs::{ReadStorage, WriteStorage}};
+use amethyst::{core::Transform,  ecs::{ReadStorage, WriteStorage}};
 use amethyst::derive::SystemDesc;
 use amethyst::ecs::{Join, System, SystemData};
 use crate::component::GridPosition;
