@@ -1,11 +1,10 @@
 use amethyst::prelude::*;
 use amethyst::renderer::{ImageFormat, SpriteSheet, SpriteSheetFormat, Texture};
 use amethyst::{GameData, SimpleState, StateData};
-use amethyst::assets::{AssetStorage, Handle, JsonFormat, Loader, ProgressCounter, RonFormat};
+use amethyst::assets::{AssetStorage, Handle, JsonFormat, Loader, ProgressCounter};
 
 use crate::component::LevelAssociation;
-use crate::game::{MainMenuData};
-use crate::level::{WorldDefinition, WorldDefinitionHandle};
+use crate::level::WorldDefinition;
 use crate::main_menu::MainMenuState;
 
 
@@ -13,7 +12,6 @@ use crate::main_menu::MainMenuState;
 pub struct LoadingState {
     progress_counter: ProgressCounter,
     spritesheet_handle: Option<Handle<SpriteSheet>>,
-    world_definition: Option<WorldDefinitionHandle>,
 }
 
 impl SimpleState for LoadingState {
