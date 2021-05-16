@@ -2,7 +2,7 @@ use amethyst::{GameData, SimpleState, StateData, assets::PrefabLoader, prelude::
 use amethyst::assets::RonFormat;
 use amethyst::core::{Transform};
 use amethyst::renderer::{Camera};
-use crate::component::{ArrowTilePrefab, InitialGhostPositionPrefab};
+use crate::component::{StaticGridTilePrefab, InitialGhostPositionPrefab};
 
 use super::LevelMetadata;
 
@@ -19,9 +19,9 @@ impl LevelState {
 
 impl SimpleState for LevelState {
     fn on_start(&mut self, data: StateData<'_, GameData<'_, '_>>) {
-        let arrows_prefab = data.world.exec(|loader: PrefabLoader<'_, ArrowTilePrefab>| {
+        let arrows_prefab = data.world.exec(|loader: PrefabLoader<'_, StaticGridTilePrefab>| {
             loader.load(
-                format!("level/{}/arrows.ron", self.level.id),
+                format!("level/{}/static_grid_tiles.ron", self.level.id),
                 RonFormat,
                 (),
             )

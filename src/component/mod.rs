@@ -1,7 +1,7 @@
 
 
 mod arrow_tile;
-mod arrow_tile_prefab;
+mod static_grid_tile_prefab;
 mod initial_ghost_position;
 mod initial_ghost_position_prefab;
 mod initial_ghost_direction;
@@ -13,7 +13,7 @@ mod level_select_marker;
 mod level_association;
 
 pub use arrow_tile::SimpleArrowTile;
-pub use arrow_tile_prefab::ArrowTilePrefab;
+pub use static_grid_tile_prefab::StaticGridTilePrefab;
 pub use grid_position::GridPosition;
 pub use ghost_color::GhostColor;
 pub use ghost_color::GhostColorComponent;

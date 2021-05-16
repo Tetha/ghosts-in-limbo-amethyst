@@ -6,7 +6,7 @@ use amethyst::renderer::types::DefaultBackend;
 use amethyst::ui::{RenderUi, UiBundle};
 use amethyst::{Application, GameDataBuilder, LoggerConfig, Result};
 use amethyst::utils::application_root_dir;
-use component::{ArrowTilePrefab, InitialGhostPositionPrefab};
+use component::{StaticGridTilePrefab, InitialGhostPositionPrefab};
 use level::WorldDefinition;
 use loading::LoadingState;
 use systems::{GhostDirectionIndicatorUpdater, GridCoordinateTransformer};
@@ -45,7 +45,7 @@ fn main() -> Result<()> {
         )?
         .with(Processor::<WorldDefinition>::new(), "", &[])
         .with_system_desc(
-            PrefabLoaderSystemDesc::<ArrowTilePrefab>::default(),
+            PrefabLoaderSystemDesc::<StaticGridTilePrefab>::default(),
             "",
             &[])
         .with_system_desc(
