@@ -2,11 +2,15 @@
 Prefab(
     entities: [
         PrefabEntity(
-            data: InitialGhostPositionPrefab(
+            data: GhostPosition(
                 position: GridPosition(x: 8, y: 4),
                 color: Blue,
                 direction: Right,
             ),
         ),
+        PrefabEntity(
+            parent: 0,
+            data: DirectionIndicator(),
+        )
     ],
 )

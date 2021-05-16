@@ -9,7 +9,7 @@ use amethyst::utils::application_root_dir;
 use component::{ArrowTilePrefab, InitialGhostPositionPrefab};
 use level::WorldDefinition;
 use loading::LoadingState;
-use systems::GridCoordinateTransformer;
+use systems::{GhostDirectionIndicatorUpdater, GridCoordinateTransformer};
 
 mod component;
 
@@ -53,6 +53,7 @@ fn main() -> Result<()> {
             "",
             &[])
         .with(GridCoordinateTransformer, "", &[])
+        .with(GhostDirectionIndicatorUpdater, "", &[])
         ;
 
     let mut game = Application::new(
