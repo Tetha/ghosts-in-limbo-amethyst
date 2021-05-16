@@ -1,4 +1,3 @@
-use amethyst::assets::Handle;
 use amethyst::ecs::{Component, DenseVecStorage};
 
 use crate::level::{LevelMetadata};
