@@ -1,4 +1,4 @@
-use amethyst::assets::{AssetStorage, HotReloadBundle, PrefabLoaderSystem, PrefabLoaderSystemDesc, Processor};
+use amethyst::assets::{HotReloadBundle, PrefabLoaderSystemDesc, Processor};
 use amethyst::core::TransformBundle;
 use amethyst::input::{InputBundle, StringBindings};
 use amethyst::renderer::{RenderFlat2D, RenderToWindow, RenderingBundle};
