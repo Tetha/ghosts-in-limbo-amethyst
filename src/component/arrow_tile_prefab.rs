@@ -11,9 +11,11 @@ use super::{GridPosition, SimpleArrowTile};
 // TODO: add this to the level definition
 // TODO: instantiate the tiles to create the loaded level
 #[derive(Debug, Deserialize, Serialize)]
-pub struct ArrowTilePrefab {
-    grid_position: GridPosition,
-    arrow_direction: ArrowDirection,
+pub enum ArrowTilePrefab {
+    TurnArrow {
+        grid_position: GridPosition,
+        arrow_direction: ArrowDirection,
+    },
 }
 
 impl<'a> PrefabData<'a> for ArrowTilePrefab {
@@ -35,11 +37,15 @@ impl<'a> PrefabData<'a> for ArrowTilePrefab {
         _children: &[Entity],
     ) -> Result<Self::Result, Error> {
         println!("Add to entity for arrow is being called");
-        grid_positions.insert(entity, self.grid_position)?;
-        simple_arrow_tiles.insert(entity, SimpleArrowTile{ direction: self.arrow_direction })?;
-        sprite_renderes.insert(entity, SpriteRender::new(sprite_sheet.clone(), self.arrow_direction.into()))?;
+        match self {
+            ArrowTilePrefab::TurnArrow { grid_position, arrow_direction } => {
+                grid_positions.insert(entity, grid_position.clone())?;
+                simple_arrow_tiles.insert(entity, SimpleArrowTile{ direction: arrow_direction.clone() })?;
+                sprite_renderes.insert(entity, SpriteRender::new(sprite_sheet.clone(), arrow_direction.clone().into()))?;
         
-        transforms.insert(entity, Transform::default())?;
+                transforms.insert(entity, Transform::default())?;
+            }
+        }
         Ok(())
     }
 }

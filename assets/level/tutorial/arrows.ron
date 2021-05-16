@@ -2,25 +2,25 @@
 Prefab(
     entities: [
         PrefabEntity(
-            data: ArrowTilePrefab(
+            data: TurnArrow(
                 grid_position: GridPosition(x: 4, y: 4),
                 arrow_direction: ArrowDirectionLeftTurnFromTop,
             ),
         ),
         PrefabEntity(
-            data: ArrowTilePrefab(
+            data: TurnArrow(
                 grid_position: GridPosition(x: 4, y: 12),
                 arrow_direction: ArrowDirectionLeftTurnFromRight,
             ),
         ),
         PrefabEntity(
-            data: ArrowTilePrefab(
+            data: TurnArrow(
                 grid_position: GridPosition(x: 12, y: 4),
                 arrow_direction: ArrowDirectionLeftTurnFromLeft,
             ),
         ),
         PrefabEntity(
-            data: ArrowTilePrefab(
+            data: TurnArrow(
                 grid_position: GridPosition(x: 12, y: 12),
                 arrow_direction: ArrowDirectionLeftTurnFromBottom,
             ),
