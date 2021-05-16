@@ -1,4 +1,4 @@
-use amethyst::{core::{Parent, Transform, math::Vector3}, ecs::{Entities, Join, ReadStorage, System, WriteStorage}, renderer::{SpriteRender, palette::{Srgb, Srgba}, resources::Tint}};
+use amethyst::{core::{Parent, Transform, math::Vector3}, ecs::{Entities, Join, ReadStorage, System, WriteStorage}, renderer::{SpriteRender, palette::{Srgba}, resources::Tint}};
 
 use crate::component::{GhostColor, GhostColorComponent, GhostDirection, GhostDirectionIndicator};
 
