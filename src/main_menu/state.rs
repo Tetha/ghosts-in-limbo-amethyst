@@ -1,11 +1,10 @@
-use amethyst::assets::{Asset, AssetStorage, Handle, Loader, Prefab, PrefabLoader, RonFormat};
-use amethyst::core::{Parent, Transform};
+use amethyst::assets::{AssetStorage, Handle, Loader};
 use amethyst::prelude::*;
 use amethyst::ecs::{Entity, ReadStorage, WriteStorage};
 use amethyst::input;
 use amethyst::renderer::SpriteSheet;
-use amethyst::shred::{Read, ReadExpect, Write};
-use amethyst::ui::{Anchor, FontAsset, Selectable, TtfFormat, UiButton, UiButtonBuilder, UiCreator, UiText, UiTransform, Widgets};
+use amethyst::shred::{ReadExpect, Write};
+use amethyst::ui::{Anchor, FontAsset, Selectable, TtfFormat, UiButton, UiButtonBuilder, UiCreator, Widgets};
 use amethyst::{GameData, SimpleState, SimpleTrans, StateData, StateEvent, Trans};
 use input::VirtualKeyCode;
 
