@@ -1,5 +1,7 @@
 
 
+mod tile;
+
 mod arrow_tile;
 mod static_grid_tile_prefab;
 mod initial_ghost_position;
@@ -22,3 +24,4 @@ pub use initial_ghost_direction::GhostDirection;
 pub use initial_ghost_position_prefab::InitialGhostPositionPrefab;
 pub use level_association::LevelAssociation;
 pub use level_select_marker::LevelSelectButtonMarker;
+pub use tile::MemoryTile;

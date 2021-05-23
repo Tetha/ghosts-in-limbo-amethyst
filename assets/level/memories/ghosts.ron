@@ -1,0 +1,16 @@
+#![enable(implicit_some)]
+Prefab(
+    entities: [
+        PrefabEntity(
+            data: GhostPosition(
+                position: GridPosition(x: 3, y: 4),
+                color: Blue,
+                direction: Left,
+            ),
+        ),
+        PrefabEntity(
+            parent: 0,
+            data: DirectionIndicator(),
+        )
+    ],
+)

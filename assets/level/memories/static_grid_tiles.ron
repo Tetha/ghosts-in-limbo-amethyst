@@ -1,0 +1,36 @@
+#![enable(implicit_some)]
+Prefab(
+    entities: [
+        PrefabEntity(
+            data: TurnArrow(
+                grid_position: GridPosition(x: 2, y: 2),
+                arrow_direction: ArrowDirectionLeftTurnFromTop,
+            )
+        ),
+        PrefabEntity(
+            data: TurnArrow(
+                grid_position: GridPosition(x: 2, y: 4),
+                arrow_direction: ArrowDirectionLeftTurnFromRight,
+            )
+        ),
+        PrefabEntity(
+            data: TurnArrow(
+                grid_position: GridPosition(x: 4, y: 2),
+                arrow_direction: ArrowDirectionLeftTurnFromLeft,
+            )
+        ),
+        PrefabEntity(
+            data: TurnArrow(
+                grid_position: GridPosition(x: 4, y: 4),
+                arrow_direction: ArrowDirectionLeftTurnFromBottom,
+            )
+        ),
+        // TODO: remove
+        PrefabEntity(
+            data: Memory(
+                grid_position: GridPosition(x: 2, y: 3),
+                memory: Love,
+            )
+        )
+    ]
+)

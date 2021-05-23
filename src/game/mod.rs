@@ -6,6 +6,9 @@ pub use t_junction::{TJunctionExit, TJunctionDirection, TJunctionMemoryPlacement
 
 use crate::level::{WorldDefinitionHandle};
 
+use serde::{Serialize, Deserialize};
+
+#[derive(Debug, Clone, Copy, Serialize, Deserialize)]
 pub enum MemoryType {
     Love,
     Pet,
