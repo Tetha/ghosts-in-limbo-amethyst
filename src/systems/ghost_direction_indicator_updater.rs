@@ -45,9 +45,9 @@ impl<'a> System<'a> for GhostDirectionIndicatorUpdater {
                  Some(indicator_transform)) => {
                     indicator_render.sprite_number = match parent_direction {
                         GhostDirection::Up => 1,
-                        GhostDirection::Down => 2,
-                        GhostDirection::Left => 3,
-                        GhostDirection::Right => 4,
+                        GhostDirection::Right => 2,
+                        GhostDirection::Down => 3,
+                        GhostDirection::Left => 4,
                     };
 
                     indicator_tint.0 = match parent_color.color {
