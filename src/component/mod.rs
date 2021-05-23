@@ -24,4 +24,5 @@ pub use initial_ghost_direction::GhostDirection;
 pub use initial_ghost_position_prefab::InitialGhostPositionPrefab;
 pub use level_association::LevelAssociation;
 pub use level_select_marker::LevelSelectButtonMarker;
+pub use tile::GoalTile;
 pub use tile::MemoryTile;

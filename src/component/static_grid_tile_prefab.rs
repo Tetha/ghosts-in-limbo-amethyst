@@ -5,7 +5,7 @@ use serde::{Deserialize, Serialize};
 
 use crate::game::{ArrowDirection, MemoryType, TJunctionDirection, TJunctionExit};
 
-use super::{GridPosition, MemoryTile, SimpleArrowTile};
+use super::{GoalTile, GridPosition, MemoryTile, SimpleArrowTile};
 
 // TODO: follow the tutorial at [1]
 // TODO: add this to the level definition
@@ -35,6 +35,7 @@ pub enum StaticGridTilePrefab {
 impl<'a> PrefabData<'a> for StaticGridTilePrefab {
     type SystemData = (
         WriteStorage<'a, GridPosition>,
+        WriteStorage<'a, GoalTile>,
         WriteStorage<'a, MemoryTile>,
         WriteStorage<'a, SimpleArrowTile>,
         WriteStorage<'a, SpriteRender>,
@@ -48,6 +49,7 @@ impl<'a> PrefabData<'a> for StaticGridTilePrefab {
         &self,
         entity: Entity,
         (grid_positions,
+            goal_tiles,
             memory_tiles,
             simple_arrow_tiles,
             sprite_renderes,
@@ -63,19 +65,22 @@ impl<'a> PrefabData<'a> for StaticGridTilePrefab {
                 grid_positions.insert(entity, grid_position.clone())?;
                 simple_arrow_tiles.insert(entity, SimpleArrowTile{ direction: arrow_direction.clone() })?;
                 sprite_renderes.insert(entity, SpriteRender::new(sprite_sheet.clone(), arrow_direction.clone().into()))?;
-        
-                transforms.insert(entity, Transform::default())?;
             }
             StaticGridTilePrefab::Memory { grid_position, memory } => {
                 grid_positions.insert(entity, grid_position.clone())?;
                 memory_tiles.insert(entity, MemoryTile{ memory_type: memory.clone() })?;
                 sprite_renderes.insert(entity, 
                     SpriteRender::new(sprite_sheet.clone(), 15))?;
-                transforms.insert(entity, Transform::default())?;
             }
             StaticGridTilePrefab::Junction { grid_position, required_memory, direction, exit, memory_on_turn } => { todo!() }
-            StaticGridTilePrefab::Exit { grid_position } => { todo!() }
+            StaticGridTilePrefab::Exit { grid_position } => {
+                grid_positions.insert(entity, grid_position.clone())?;
+                sprite_renderes.insert(entity,
+                    SpriteRender::new(sprite_sheet.clone(), 14))?;
+                goal_tiles.insert(entity, GoalTile{})?;
+            }
         }
+        transforms.insert(entity, Transform::default())?;
         Ok(())
     }
 }

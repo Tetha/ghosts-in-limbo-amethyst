@@ -25,6 +25,11 @@ Prefab(
                 arrow_direction: ArrowDirectionLeftTurnFromBottom,
             )
         ),
+        PrefabEntity(
+            data: Exit(
+                grid_position: GridPosition(x: 7, y: 3),
+            )
+        ),
         // TODO: remove
         PrefabEntity(
             data: Memory(
