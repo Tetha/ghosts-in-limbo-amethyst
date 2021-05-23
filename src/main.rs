@@ -9,7 +9,7 @@ use amethyst::utils::application_root_dir;
 use component::{StaticGridTilePrefab, InitialGhostPositionPrefab};
 use level::WorldDefinition;
 use loading::LoadingState;
-use systems::{GhostDirectionIndicatorUpdater, GridCoordinateTransformer};
+use systems::{GhostDirectionIndicatorUpdater, GridCoordinateTransformer, MemoryIndicatorUpdater};
 
 mod component;
 
@@ -54,6 +54,7 @@ fn main() -> Result<()> {
             &[])
         .with(GridCoordinateTransformer, "", &[])
         .with(GhostDirectionIndicatorUpdater, "", &[])
+        .with(MemoryIndicatorUpdater, "", &[])
         ;
 
     let mut game = Application::new(

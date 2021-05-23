@@ -1,4 +1,4 @@
-use amethyst::ecs::{Component, DenseVecStorage};
+use amethyst::ecs::{Component, DenseVecStorage, NullStorage};
 
 use crate::game::MemoryType;
 
@@ -9,4 +9,11 @@ pub struct MemoryTile {
 
 impl Component for MemoryTile {
     type Storage = DenseVecStorage<Self>;
+}
+
+#[derive(Debug, Default)]
+pub struct MemoryTypeIndicator {}
+
+impl Component for MemoryTypeIndicator {
+    type Storage = NullStorage<Self>;
 }

@@ -36,6 +36,10 @@ Prefab(
                 grid_position: GridPosition(x: 2, y: 3),
                 memory: Love,
             )
-        )
+        ),
+        PrefabEntity(
+            data: MemoryIndicator(),
+            parent: 5,
+        ),
     ]
 )
