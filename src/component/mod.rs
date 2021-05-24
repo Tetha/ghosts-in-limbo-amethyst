@@ -13,6 +13,7 @@ mod grid_position;
 mod junction_tile;
 mod level_select_marker;
 mod level_association;
+mod sprite_selector;
 
 pub use arrow_tile::SimpleArrowTile;
 pub use static_grid_tile_prefab::StaticGridTilePrefab;
@@ -27,3 +28,4 @@ pub use level_select_marker::LevelSelectButtonMarker;
 pub use tile::GoalTile;
 pub use tile::{MemoryTile, MemoryTypeIndicator};
 pub use junction_tile::{JunctionTile,JunctionMemoryIndicator};
+pub use sprite_selector::SpriteSelector;

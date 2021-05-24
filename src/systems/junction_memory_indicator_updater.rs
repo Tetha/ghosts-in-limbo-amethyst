@@ -1,6 +1,6 @@
 use amethyst::{core::{Parent, Transform, math::Vector3}, ecs::{Entities, Join, ReadStorage, System, WriteStorage}, renderer::{SpriteRender, palette::{Srgba}, resources::Tint}};
 
-use crate::{component::{GhostColor, GhostColorComponent, JunctionMemoryIndicator, JunctionTile, MemoryTile, MemoryTypeIndicator}, game::TJunctionMemoryPlacement};
+use crate::{component::{GhostColor, GhostColorComponent, JunctionMemoryIndicator, JunctionTile, MemoryTile, MemoryTypeIndicator, SpriteSelector}, game::TJunctionMemoryPlacement};
 
 
 #[derive(Copy, Clone, Debug, Default)]
@@ -39,12 +39,7 @@ impl<'a> System<'a> for JunctionMemoryUpdater {
                  Some(indicator_render),
                  Some(indicator_transform),
                  Some(indicator_tint)) => {
-                    indicator_render.sprite_number = match parent_tile.memory {
-                        crate::game::MemoryType::Love => 16,
-                        crate::game::MemoryType::Pet => 17,
-                        crate::game::MemoryType::Sun => 18,
-                    };
-
+                    indicator_render.sprite_number = parent_tile.memory.sprite_index();
 
                     indicator_transform.set_scale(Vector3::new(0.25, 0.25, 1.));
                     match parent_tile.memory_position {

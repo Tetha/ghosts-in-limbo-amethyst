@@ -1,6 +1,6 @@
 use amethyst::{core::{Parent, Transform, math::Vector3}, ecs::{Entities, Join, ReadStorage, System, WriteStorage}, renderer::{SpriteRender, palette::{Srgba}, resources::Tint}};
 
-use crate::{component::{GhostColor, GhostColorComponent, MemoryTile, MemoryTypeIndicator}};
+use crate::{component::{GhostColor, GhostColorComponent, MemoryTile, MemoryTypeIndicator, SpriteSelector}};
 
 
 #[derive(Copy, Clone, Debug, Default)]
@@ -43,11 +43,7 @@ impl<'a> System<'a> for MemoryIndicatorUpdater {
                  Some(indicator_render),
                  Some(indicator_tint),
                  Some(indicator_transform)) => {
-                    indicator_render.sprite_number = match parent_tile.memory_type {
-                        crate::game::MemoryType::Love => 16, 
-                        crate::game::MemoryType::Pet => 17,
-                        crate::game::MemoryType::Sun => 18,
-                    };
+                    indicator_render.sprite_number = parent_tile.memory_type.sprite_index();
 
                     indicator_tint.0 = match parent_color.color {
                         GhostColor::Green => Srgba::new(0.0, 1.0, 0.0, 1.0),
