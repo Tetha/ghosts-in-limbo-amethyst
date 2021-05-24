@@ -5,7 +5,7 @@ use serde::{Deserialize, Serialize};
 
 use crate::game::{ArrowDirection, MemoryType, TJunctionDirection, TJunctionExit};
 
-use super::{GoalTile, GridPosition, MemoryTile, MemoryTypeIndicator, SimpleArrowTile};
+use super::{GhostColor, GhostColorComponent, GoalTile, GridPosition, MemoryTile, MemoryTypeIndicator, SimpleArrowTile};
 
 // TODO: follow the tutorial at [1]
 // TODO: add this to the level definition
@@ -19,6 +19,7 @@ pub enum StaticGridTilePrefab {
     Memory {
         grid_position: GridPosition,
         memory: MemoryType,
+        ghost: GhostColor,
     },
     MemoryIndicator {},
     Junction {
@@ -35,6 +36,7 @@ pub enum StaticGridTilePrefab {
 
 impl<'a> PrefabData<'a> for StaticGridTilePrefab {
     type SystemData = (
+        WriteStorage<'a, GhostColorComponent>,
         WriteStorage<'a, GridPosition>,
         WriteStorage<'a, GoalTile>,
         WriteStorage<'a, MemoryTile>,
@@ -51,7 +53,9 @@ impl<'a> PrefabData<'a> for StaticGridTilePrefab {
     fn add_to_entity(
         &self,
         entity: Entity,
-        (grid_positions,
+        (
+            ghost_colors,
+            grid_positions,
             goal_tiles,
             memory_tiles,
             memory_type_indicators,
@@ -71,9 +75,10 @@ impl<'a> PrefabData<'a> for StaticGridTilePrefab {
                 simple_arrow_tiles.insert(entity, SimpleArrowTile{ direction: arrow_direction.clone() })?;
                 sprite_renderes.insert(entity, SpriteRender::new(sprite_sheet.clone(), arrow_direction.clone().into()))?;
             }
-            StaticGridTilePrefab::Memory { grid_position, memory } => {
+            StaticGridTilePrefab::Memory { grid_position, memory, ghost: color } => {
                 grid_positions.insert(entity, grid_position.clone())?;
-                memory_tiles.insert(entity, MemoryTile{ memory_type: memory.clone() })?;
+                memory_tiles.insert(entity, MemoryTile{ memory_type: *memory })?;
+                ghost_colors.insert(entity, GhostColorComponent{ color: *color })?;
                 sprite_renderes.insert(entity, 
                     SpriteRender::new(sprite_sheet.clone(), 15))?;
             },
