@@ -26,3 +26,4 @@ pub use level_association::LevelAssociation;
 pub use level_select_marker::LevelSelectButtonMarker;
 pub use tile::GoalTile;
 pub use tile::{MemoryTile, MemoryTypeIndicator};
+pub use junction_tile::{JunctionTile,JunctionMemoryIndicator};

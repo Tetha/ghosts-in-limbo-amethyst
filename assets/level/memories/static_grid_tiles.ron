@@ -26,6 +26,19 @@ Prefab(
             )
         ),
         PrefabEntity(
+            data: Junction(
+                grid_position: GridPosition(x: 4, y: 3),
+                required_memory: Love,
+                direction: LeftTurn,
+                exit: Up,
+                memory_on_turn: true,
+            ),
+        ),
+        PrefabEntity(
+            parent: 4,
+            data: JunctionIndicator(),
+        ),
+        PrefabEntity(
             data: Exit(
                 grid_position: GridPosition(x: 7, y: 3),
             )
@@ -40,7 +53,7 @@ Prefab(
         ),
         PrefabEntity(
             data: MemoryIndicator(),
-            parent: 5,
+            parent: 7,
         ),
     ]
 )
