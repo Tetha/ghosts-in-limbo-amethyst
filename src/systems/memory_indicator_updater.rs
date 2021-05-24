@@ -45,12 +45,7 @@ impl<'a> System<'a> for MemoryIndicatorUpdater {
                  Some(indicator_transform)) => {
                     indicator_render.sprite_number = parent_tile.memory_type.sprite_index();
 
-                    indicator_tint.0 = match parent_color.color {
-                        GhostColor::Green => Srgba::new(0.0, 1.0, 0.0, 1.0),
-                        GhostColor::Blue => Srgba::new(0.0, 0.0, 1.0, 1.0),
-                        GhostColor::Red => Srgba::new(1.0, 0.0, 0.0, 1.0),
-                    };
-
+                    indicator_tint.0 = parent_color.color.to_color();
                     indicator_transform.set_translation_xyz(0.0, 5.0, 0.0);
                     indicator_transform.set_scale(Vector3::new(0.2, 0.2, 1.0));
                 }

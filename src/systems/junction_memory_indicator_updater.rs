@@ -47,11 +47,7 @@ impl<'a> System<'a> for JunctionMemoryUpdater {
                         TJunctionMemoryPlacement::Turn => indicator_transform.set_translation_xyz(15., -20., 0.),
                     };
 
-                    indicator_tint.0 = match parent_tile.ghost {
-                        GhostColor::Green => Srgba::new(0.0, 1.0, 0.0, 1.0),
-                        GhostColor::Blue => Srgba::new(0.0, 0.0, 1.0, 1.0),
-                        GhostColor::Red => Srgba::new(1.0, 0.0, 0.0, 1.0),
-                    }
+                    indicator_tint.0 = parent_tile.ghost.to_color();
                 },
                 _ => {}
             }

@@ -53,11 +53,7 @@ impl<'a> PrefabData<'a> for InitialGhostPositionPrefab {
                 ghost_colors.insert(entity, GhostColorComponent{ color: color.clone() })?;
                 sprite_renders.insert(entity, SpriteRender::new(sprite_sheet.clone(), 0))?;
 
-                match color {
-                    GhostColor::Blue => tints.insert(entity, Tint(Srgb::new(0.0, 0.0, 1.0).into()))?,
-                    GhostColor::Red => tints.insert(entity, Tint(Srgb::new(1.0, 0.0, 0.0).into()))?,
-                    GhostColor::Green => tints.insert(entity, Tint(Srgb::new(0.0, 1.0, 0.0).into()))?,
-                };
+                tints.insert(entity, Tint(color.to_color()))?;
             }
             InitialGhostPositionPrefab::DirectionIndicator {  } => {
                 ghost_direction_indicators.insert(entity, GhostDirectionIndicator)?;
