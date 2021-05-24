@@ -29,9 +29,10 @@ Prefab(
             data: Junction(
                 grid_position: GridPosition(x: 4, y: 3),
                 required_memory: Love,
-                direction: LeftTurn,
+                direction: RightTurn,
                 exit: Up,
                 memory_on_turn: true,
+                ghost: Blue,
             ),
         ),
         PrefabEntity(

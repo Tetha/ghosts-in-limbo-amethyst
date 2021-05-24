@@ -1,17 +1,19 @@
-use amethyst::{assets::{PrefabData, ProgressCounter}, ecs::NullStorage};
-use amethyst::derive::PrefabData;
-use amethyst::ecs::{Component, DenseVecStorage, Entity};
-use amethyst::Error;
+use amethyst::{ecs::NullStorage};
+use amethyst::ecs::{Component, DenseVecStorage};
 
-use crate::game::{TJunctionDirection, TJunctionExit, TJunctionMemoryPlacement};
+use crate::game::{MemoryType, TJunctionDirection, TJunctionExit, TJunctionMemoryPlacement};
 
 use serde::{Deserialize, Serialize};
 
-#[derive(Debug, Clone, Copy, PrefabData, Deserialize, Serialize)]
+use super::GhostColor;
+
+#[derive(Debug, Clone, Copy, Deserialize, Serialize)]
 pub struct JunctionTile {
-    exit: TJunctionExit,
-    turn: TJunctionDirection,
-    memory_position: TJunctionMemoryPlacement,
+    pub exit: TJunctionExit,
+    pub turn: TJunctionDirection,
+    pub memory_position: TJunctionMemoryPlacement,
+    pub memory: MemoryType,
+    pub ghost: GhostColor,
 }
 
 impl Component for JunctionTile {

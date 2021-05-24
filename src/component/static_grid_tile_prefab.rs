@@ -5,9 +5,9 @@ use amethyst::ecs::Entity;
 use amethyst::Error;
 use serde::{Deserialize, Serialize};
 
-use crate::{component::JunctionMemoryIndicator, game::{ArrowDirection, MemoryType, TJunctionDirection, TJunctionExit}};
+use crate::{component::JunctionMemoryIndicator, game::{ArrowDirection, MemoryType, TJunctionDirection, TJunctionExit, TJunctionMemoryPlacement}};
 
-use super::{GhostColor, GhostColorComponent, GoalTile, GridPosition, MemoryTile, MemoryTypeIndicator, SimpleArrowTile};
+use super::{GhostColor, GhostColorComponent, GoalTile, GridPosition, JunctionTile, MemoryTile, MemoryTypeIndicator, SimpleArrowTile};
 
 // TODO: follow the tutorial at [1]
 // TODO: add this to the level definition
@@ -30,6 +30,7 @@ pub enum StaticGridTilePrefab {
         direction: TJunctionDirection,
         exit: TJunctionExit,
         memory_on_turn: bool,
+        ghost: GhostColor,
     },
     JunctionIndicator {},
     Exit {
@@ -42,6 +43,7 @@ impl<'a> PrefabData<'a> for StaticGridTilePrefab {
         WriteStorage<'a, GhostColorComponent>,
         WriteStorage<'a, GridPosition>,
         WriteStorage<'a, GoalTile>,
+        WriteStorage<'a, JunctionTile>,
         WriteStorage<'a, JunctionMemoryIndicator>,
         WriteStorage<'a, MemoryTile>,
         WriteStorage<'a, MemoryTypeIndicator>,
@@ -61,6 +63,7 @@ impl<'a> PrefabData<'a> for StaticGridTilePrefab {
             ghost_colors,
             grid_positions,
             goal_tiles,
+            junction_tiles,
             junction_memory_indicators,
             memory_tiles,
             memory_type_indicators,
@@ -101,11 +104,12 @@ impl<'a> PrefabData<'a> for StaticGridTilePrefab {
                 required_memory,
                 direction,
                 exit,
-                memory_on_turn
+                memory_on_turn,
+                ghost,
             } => {
                 load_junction(
-                    entity, grid_position, required_memory, direction, exit, memory_on_turn,
-                    &sprite_sheet, grid_positions, sprite_renderes, transforms)?;
+                    entity, grid_position, required_memory, direction, exit, memory_on_turn, ghost,
+                    &sprite_sheet, junction_tiles, grid_positions, sprite_renderes, transforms)?;
             },
             StaticGridTilePrefab::JunctionIndicator {} => {
                 transforms.insert(entity, Transform::default())?;
@@ -133,7 +137,9 @@ fn load_junction<'a>(
     direction: &TJunctionDirection,
     exit: &TJunctionExit,
     memory_on_turn: &bool,
+    ghost: &GhostColor,
     sprite_sheet: &Handle<SpriteSheet>,
+    junction_tiles: &mut WriteStorage<'a, JunctionTile>,
     grid_positions: &mut WriteStorage<'a, GridPosition>,
     sprite_renderes: &mut WriteStorage<'a, SpriteRender>,
     transforms: &mut WriteStorage<'a, Transform>,
@@ -158,5 +164,16 @@ fn load_junction<'a>(
         TJunctionExit::Right => { transform.set_rotation_2d(1.5 * PI); }
     }
     transforms.insert(entity, transform)?;
+
+    junction_tiles.insert(entity, JunctionTile{
+        exit: *exit,
+        turn: *direction,
+        memory_position: match memory_on_turn {
+            true => TJunctionMemoryPlacement::Turn,
+            false => TJunctionMemoryPlacement::Straight,
+        },
+        memory: *required_memory,
+        ghost: *ghost,
+    })?;
     Ok(())
 }

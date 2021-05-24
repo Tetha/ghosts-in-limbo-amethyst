@@ -1,8 +1,10 @@
 mod arrow_tile_render;
 mod grid_coordinate_transformer;
 mod ghost_direction_indicator_updater;
+mod junction_memory_indicator_updater;
 mod memory_indicator_updater;
 
 pub use grid_coordinate_transformer::GridCoordinateTransformer;
 pub use ghost_direction_indicator_updater::GhostDirectionIndicatorUpdater;
+pub use junction_memory_indicator_updater::JunctionMemoryUpdater;
 pub use memory_indicator_updater::MemoryIndicatorUpdater;
