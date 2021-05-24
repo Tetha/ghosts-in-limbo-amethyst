@@ -14,6 +14,7 @@ mod junction_tile;
 mod level_select_marker;
 mod level_association;
 mod sprite_selector;
+mod toolbox_position;
 
 pub use arrow_tile::SimpleArrowTile;
 pub use static_grid_tile_prefab::StaticGridTilePrefab;

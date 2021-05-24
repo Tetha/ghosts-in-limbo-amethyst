@@ -7,25 +7,33 @@ use serde::{Deserialize, Serialize};
 
 use crate::{component::JunctionMemoryIndicator, game::{ArrowDirection, MemoryType, TJunctionDirection, TJunctionExit, TJunctionMemoryPlacement}};
 
-use super::{GhostColor, GhostColorComponent, GoalTile, GridPosition, JunctionTile, MemoryTile, MemoryTypeIndicator, SimpleArrowTile};
+use super::{GhostColor, GhostColorComponent, GoalTile, GridPosition, JunctionTile, MemoryTile, MemoryTypeIndicator, SimpleArrowTile, toolbox_position::ToolboxPosition};
 
+#[derive(Debug, Serialize, Deserialize)]
+pub enum TilePosition {
+    Grid { x: usize, y: usize },
+    Toolbox { index: usize },
+}
 // TODO: follow the tutorial at [1]
 // TODO: add this to the level definition
 // TODO: instantiate the tiles to create the loaded level
 #[derive(Debug, Deserialize, Serialize)]
 pub enum StaticGridTilePrefab {
     TurnArrow {
-        grid_position: GridPosition,
+        position: TilePosition,
+        //grid_position: GridPosition,
         arrow_direction: ArrowDirection,
     },
     Memory {
-        grid_position: GridPosition,
+        position: TilePosition,
+        //grid_position: GridPosition,
         memory: MemoryType,
         ghost: GhostColor,
     },
     MemoryIndicator {},
     Junction {
-        grid_position: GridPosition,
+        position: TilePosition,
+        //grid_position: GridPosition,
         required_memory: MemoryType,
         direction: TJunctionDirection,
         exit: TJunctionExit,
@@ -34,7 +42,8 @@ pub enum StaticGridTilePrefab {
     },
     JunctionIndicator {},
     Exit {
-        grid_position: GridPosition,
+        position: TilePosition,
+        //grid_position: GridPosition,
     }
 }
 
@@ -49,6 +58,7 @@ impl<'a> PrefabData<'a> for StaticGridTilePrefab {
         WriteStorage<'a, MemoryTypeIndicator>,
         WriteStorage<'a, SimpleArrowTile>,
         WriteStorage<'a, SpriteRender>,
+        WriteStorage<'a, ToolboxPosition>,
         WriteStorage<'a, Transform>,
         WriteStorage<'a, Tint>,
         ReadExpect<'a, Handle<SpriteSheet>>
@@ -69,6 +79,7 @@ impl<'a> PrefabData<'a> for StaticGridTilePrefab {
             memory_type_indicators,
             simple_arrow_tiles,
             sprite_renderes,
+            toolbox_positions,
             transforms,
             tints,
             sprite_sheet): &mut Self::SystemData,
@@ -78,15 +89,15 @@ impl<'a> PrefabData<'a> for StaticGridTilePrefab {
     ) -> Result<Self::Result, Error> {
         println!("Add to entity for arrow is being called");
         match self {
-            StaticGridTilePrefab::TurnArrow { grid_position, arrow_direction } => {
+            StaticGridTilePrefab::TurnArrow { position, arrow_direction } => {
                 transforms.insert(entity, Transform::default())?;
-                grid_positions.insert(entity, grid_position.clone())?;
+                load_position(entity, grid_positions, toolbox_positions, position)?;
                 simple_arrow_tiles.insert(entity, SimpleArrowTile{ direction: arrow_direction.clone() })?;
                 sprite_renderes.insert(entity, SpriteRender::new(sprite_sheet.clone(), arrow_direction.clone().into()))?;
             }
-            StaticGridTilePrefab::Memory { grid_position, memory, ghost: color } => {
+            StaticGridTilePrefab::Memory { position, memory, ghost: color } => {
                 transforms.insert(entity, Transform::default())?;
-                grid_positions.insert(entity, grid_position.clone())?;
+                load_position(entity, grid_positions, toolbox_positions, position)?;
                 memory_tiles.insert(entity, MemoryTile{ memory_type: *memory })?;
                 ghost_colors.insert(entity, GhostColorComponent{ color: *color })?;
                 sprite_renderes.insert(entity, 
@@ -100,7 +111,7 @@ impl<'a> PrefabData<'a> for StaticGridTilePrefab {
                     SpriteRender::new(sprite_sheet.clone(), 17))?;
             },
             StaticGridTilePrefab::Junction {
-                grid_position,
+                position,
                 required_memory,
                 direction,
                 exit,
@@ -108,8 +119,8 @@ impl<'a> PrefabData<'a> for StaticGridTilePrefab {
                 ghost,
             } => {
                 load_junction(
-                    entity, grid_position, required_memory, direction, exit, memory_on_turn, ghost,
-                    &sprite_sheet, junction_tiles, grid_positions, sprite_renderes, transforms)?;
+                    entity, position, required_memory, direction, exit, memory_on_turn, ghost,
+                    &sprite_sheet, junction_tiles, grid_positions, sprite_renderes, toolbox_positions, transforms)?;
             },
             StaticGridTilePrefab::JunctionIndicator {} => {
                 transforms.insert(entity, Transform::default())?;
@@ -118,10 +129,10 @@ impl<'a> PrefabData<'a> for StaticGridTilePrefab {
                 sprite_renderes.insert(entity,
                     SpriteRender::new(sprite_sheet.clone(), 17))?;
             }
-            StaticGridTilePrefab::Exit { grid_position } => {
+            StaticGridTilePrefab::Exit { position } => {
                 transforms.insert(entity, Transform::default())?;
                 goal_tiles.insert(entity, GoalTile{})?;
-                grid_positions.insert(entity, grid_position.clone())?;
+                load_position(entity, grid_positions, toolbox_positions, position)?;
                 sprite_renderes.insert(entity,
                     SpriteRender::new(sprite_sheet.clone(), 14))?;
             }
@@ -130,9 +141,24 @@ impl<'a> PrefabData<'a> for StaticGridTilePrefab {
     }
 }
 
+fn load_position<'a>(
+    entity: Entity,
+    grid_positions: &mut WriteStorage<'a, GridPosition>,
+    toolbox_positions: &mut WriteStorage<'a, ToolboxPosition>,
+    position: &TilePosition) -> Result<(), Error> {
+    match position {
+        TilePosition::Grid { x, y } => {
+            grid_positions.insert(entity, GridPosition{x: *x, y: *y})?;
+        }
+        TilePosition::Toolbox { index } => {
+            toolbox_positions.insert(entity, ToolboxPosition{ index: *index })?;
+        }
+    }
+    Ok(())
+}
 fn load_junction<'a>(
     entity: Entity,
-    grid_position: &GridPosition,
+    position: &TilePosition,
     required_memory: &MemoryType,
     direction: &TJunctionDirection,
     exit: &TJunctionExit,
@@ -142,11 +168,12 @@ fn load_junction<'a>(
     junction_tiles: &mut WriteStorage<'a, JunctionTile>,
     grid_positions: &mut WriteStorage<'a, GridPosition>,
     sprite_renderes: &mut WriteStorage<'a, SpriteRender>,
+    toolbox_positions: &mut WriteStorage<'a, ToolboxPosition>,
     transforms: &mut WriteStorage<'a, Transform>,
 ) -> Result<(), Error> {
     println!("T Junction not done yet");
 
-    grid_positions.insert(entity, grid_position.clone())?;
+    load_position(entity, grid_positions, toolbox_positions, position)?;
     sprite_renderes.insert(entity, SpriteRender::new(sprite_sheet.clone(), 13))?;
 
 
