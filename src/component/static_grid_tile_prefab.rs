@@ -87,7 +87,6 @@ impl<'a> PrefabData<'a> for StaticGridTilePrefab {
         _entities: &[Entity],
         _children: &[Entity],
     ) -> Result<Self::Result, Error> {
-        println!("Add to entity for arrow is being called");
         match self {
             StaticGridTilePrefab::TurnArrow { position, arrow_direction } => {
                 transforms.insert(entity, Transform::default())?;
