@@ -1,4 +1,4 @@
-use amethyst::{assets::{Handle, PrefabData}, core::{Transform}, ecs::{WriteStorage}, renderer::{SpriteRender, SpriteSheet, palette::{Srgb, Srgba}, resources::Tint}, shred::ReadExpect};
+use amethyst::{assets::{Handle, PrefabData}, core::{Transform}, ecs::{WriteStorage}, renderer::{SpriteRender, SpriteSheet, palette::{Srgba}, resources::Tint}, shred::ReadExpect};
 use serde::{Deserialize, Serialize};
 
 use super::{GhostDirectionIndicator, GridPosition, ghost_color::{GhostColor, GhostColorComponent}, initial_ghost_direction::GhostDirection, initial_ghost_position::InitialGhostPosition};

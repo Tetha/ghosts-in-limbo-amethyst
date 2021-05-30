@@ -1,6 +1,6 @@
-use amethyst::{core::{Parent, Transform, math::Vector3}, ecs::{Entities, Join, ReadStorage, System, WriteStorage}, renderer::{SpriteRender, palette::{Srgba}, resources::Tint}};
+use amethyst::{core::{Parent, Transform, math::Vector3}, ecs::{Entities, Join, ReadStorage, System, WriteStorage}, renderer::{SpriteRender, resources::Tint}};
 
-use crate::{component::{GhostColor, GhostColorComponent, MemoryTile, MemoryTypeIndicator, SpriteSelector}};
+use crate::{component::{GhostColorComponent, MemoryTile, MemoryTypeIndicator, SpriteSelector}};
 
 
 #[derive(Copy, Clone, Debug, Default)]

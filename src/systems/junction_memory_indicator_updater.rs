@@ -1,6 +1,6 @@
-use amethyst::{core::{Parent, Transform, math::Vector3}, ecs::{Entities, Join, ReadStorage, System, WriteStorage}, renderer::{SpriteRender, palette::{Srgba}, resources::Tint}};
+use amethyst::{core::{Parent, Transform, math::Vector3}, ecs::{Entities, Join, ReadStorage, System, WriteStorage}, renderer::{SpriteRender, resources::Tint}};
 
-use crate::{component::{GhostColor, GhostColorComponent, JunctionMemoryIndicator, JunctionTile, MemoryTile, MemoryTypeIndicator, SpriteSelector}, game::TJunctionMemoryPlacement};
+use crate::{component::{JunctionMemoryIndicator, JunctionTile, SpriteSelector}, game::TJunctionMemoryPlacement};
 
 
 #[derive(Copy, Clone, Debug, Default)]
