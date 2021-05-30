@@ -48,7 +48,7 @@ Prefab(
         PrefabEntity(
             data: Memory(
                 //position: Grid(x: 2, y: 3),
-                position: Toolbox(index: 0),
+                position: Toolbox(toolbox: 0, index: 0),
                 memory: Love,
                 ghost: Blue,
             )

@@ -12,7 +12,7 @@ use super::{GhostColor, GhostColorComponent, GoalTile, GridPosition, JunctionTil
 #[derive(Debug, Serialize, Deserialize)]
 pub enum TilePosition {
     Grid { x: usize, y: usize },
-    Toolbox { index: usize },
+    Toolbox { toolbox: usize, index: usize },
 }
 // TODO: follow the tutorial at [1]
 // TODO: add this to the level definition
@@ -150,8 +150,8 @@ fn load_position<'a>(
         TilePosition::Grid { x, y } => {
             grid_positions.insert(entity, GridPosition{x: *x, y: *y})?;
         }
-        TilePosition::Toolbox { index } => {
-            toolbox_positions.insert(entity, ToolboxPosition{ index: *index })?;
+        TilePosition::Toolbox { toolbox, index } => {
+            toolbox_positions.insert(entity, ToolboxPosition{ toolbox: *toolbox, index: *index })?;
         }
     }
     Ok(())

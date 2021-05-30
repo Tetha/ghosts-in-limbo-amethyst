@@ -10,7 +10,7 @@ edition = "2018"
 #syn = "=1.0.51" # Downgrade because the 1.0.52 doesn't compile with my rust 1.47
 #crossbeam-utils = "=0.8.0"
 serde = { version = "1.0", features = ["derive"] }
-
+log = ">= 0.4"
 
 [dependencies.amethyst]
 version = "=0.15.1"

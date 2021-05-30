@@ -2,7 +2,7 @@ use amethyst::{GameData, SimpleState, StateData, assets::PrefabLoader, prelude::
 use amethyst::assets::RonFormat;
 use amethyst::core::{Transform};
 use amethyst::renderer::{Camera};
-use crate::component::{StaticGridTilePrefab, InitialGhostPositionPrefab};
+use crate::component::{InitialGhostPositionPrefab, StaticGridTilePrefab, Toolbox};
 
 use super::LevelMetadata;
 
@@ -39,11 +39,23 @@ impl SimpleState for LevelState {
             .with(arrows_prefab.clone())
             .build();
 
-        let bar = data.world
+        data.world
             .create_entity()
             .with(ghosts_prefab.clone())
             .build();
 
+
+        let mut toolbox_transform = Transform::default();
+        toolbox_transform.set_translation_xyz(500.0, 100., 0.);
+        data.world
+            .create_entity()
+            .with(Toolbox{
+                id: 0,
+                capacity: 5,
+                offset: 0 
+            })
+            .with(toolbox_transform)
+            .build();
         let mut camera_transform = Transform::default();
         camera_transform.set_translation_xyz(512., 384., 1.0);
         data.world.create_entity()
