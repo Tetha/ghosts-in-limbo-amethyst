@@ -171,8 +171,6 @@ fn load_junction<'a>(
     toolbox_positions: &mut WriteStorage<'a, ToolboxPosition>,
     transforms: &mut WriteStorage<'a, Transform>,
 ) -> Result<(), Error> {
-    println!("T Junction not done yet");
-
     load_position(entity, grid_positions, toolbox_positions, position)?;
     sprite_renderes.insert(entity, SpriteRender::new(sprite_sheet.clone(), 13))?;
 
