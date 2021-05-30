@@ -12,7 +12,7 @@ use super::{GhostColor, GhostColorComponent, GoalTile, GridPosition, JunctionTil
 #[derive(Debug, Serialize, Deserialize)]
 pub enum TilePosition {
     Grid { x: usize, y: usize },
-    Toolbox { toolbox: usize, index: usize },
+    Toolbox { toolbox: usize, index: i32 },
 }
 // TODO: follow the tutorial at [1]
 // TODO: add this to the level definition

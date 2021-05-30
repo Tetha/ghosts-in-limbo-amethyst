@@ -7,10 +7,10 @@ pub struct Toolbox {
     pub id: usize,
 
     // how many elements can this toolbox display?
-    pub capacity: usize,
+    pub capacity: i32,
 
     // offset into the toolbox elements. Used for scrolling.
-    pub offset: usize,
+    pub offset: i32,
 }
 
 impl Component for Toolbox {

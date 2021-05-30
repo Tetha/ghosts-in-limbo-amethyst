@@ -45,7 +45,8 @@ impl<'a> System<'a> for ToolboxElementVisibility {
                         if hidden.contains(element) {
                             hidden.remove(element);
                         }
-                        element_transform.set_translation_y(60.0 * relative_index as f32);
+
+                        element_transform.set_translation_y(60.0 * (toolbox.capacity - relative_index) as f32);
                     } else {
                         // offset too big => falls of the other end => hide as well
                         if !hidden.contains(element) {
